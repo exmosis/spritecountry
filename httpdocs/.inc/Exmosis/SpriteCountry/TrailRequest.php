@@ -5,7 +5,8 @@ use Exception;
 
 class TrailRequest {
 
-	const FILE__TRAIL_DATA = 'data/test.csv';
+	// TODO: de-dupe this vs trail.php
+	const FILE__TRAIL_DATA = 'data/trail_entries.csv';
 
 	const WEB__IMG_BASE_DIR = '/data/img/';
 
@@ -63,20 +64,11 @@ class TrailRequest {
 	
 	public function getHtml() {
 
-		$selected_record = null;
-
 		$trail = $this->getTrail();
-		
 		$trail_entry = $trail->getTrailEntry($this->trail_n);
 				
 		if (! is_null($trail_entry)) {
-			
 			$html = $trail_entry->getHtml();			
-			
-			//if ($next_id = $trail->getNextId($this->trail_n) ) {
-			//	$html .= $this->getTrailNextHtml($next_id);
-			// }			
-			
 			return $html;			
 		}
 		
@@ -84,11 +76,5 @@ class TrailRequest {
 			
 	}
 	
-	private function getTrailNextHtml(int $next_id) {
-		$html = '<p><a href="/trail/' . $this->trail_code . '/' . $next_id . '">Next</a></p>';
-		return $html;
-	}
-
-
 }
 
