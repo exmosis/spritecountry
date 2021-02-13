@@ -19,6 +19,7 @@ class Header {
 <html>
 	<head>
 		<title>' . Header::HEADER_PREFIX . $this->title . '</title>
+		<link rel="stylesheet" href="/css/spritecountry.css">
 	</head>
 	<body>
 		' . $this->getHeaderMenu() . '
