@@ -19,3 +19,36 @@ img#trail_image {
   margin-left: auto;
   margin-right: auto;
 }
+
+/* ===== Text ===== */
+
+/* Size text block */
+div#text_container {
+	width: 90vw;
+	height: 10px;
+	max-width: 500px;
+	min-height: 80vh;
+}
+
+/* Centre text */
+div#text_container {
+ 	display: block;
+ 	margin-left: auto;
+ 	margin-right: auto;	
+}
+
+div#trail_text {
+	font-size: 3em;
+	color: #e0e0e0;
+}
+
+div#text_container a.next {
+	font-size: 2em;
+	color: #c0c0c0;
+	text-decoration: none;
+	
+	display: block;
+	position: absolute;
+	top: 0.5em;
+	right: 3em;	
+}

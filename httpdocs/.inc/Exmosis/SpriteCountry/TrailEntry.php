@@ -56,7 +56,7 @@ abstract class TrailEntry {
 
 	public function getNextLinkOpen() {
 		if (! is_null($next = $this->getnext())) {
-			$html = '<a href="/trail/' . $this->trail_code . '/' . $next->getId() . '">';
+			$html = '<a class="next" href="/trail/' . $this->trail_code . '/' . $next->getId() . '">';
 			return $html;
 		}
 		return '';

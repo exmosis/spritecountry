@@ -14,10 +14,12 @@ class TrailEntryText extends TrailEntry {
 	}
 	
 	public function getHtml() {
-		$html = '<p>' . $this->text . '</p>';
+		$html = '<div id="text_container">';
+		$html .= '<div id="trail_text">' . $this->text . '</div>';
 		if (! is_null($this->getNext())) {
-			$html .= '<p>' . $this->getNextLinkOpen() . 'Next &gt;' . $this->getNextLinkClose() . '</p>';
+			$html .= '<div>' . $this->getNextLinkOpen() . '&gt;' . $this->getNextLinkClose() . '</div>';
 		}
+		$html .= '</div>';
 		return $html;
 	} 
 	
