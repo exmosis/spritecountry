@@ -17,7 +17,7 @@ class TrailEntryImage extends TrailEntry {
 		$html = $this->getImageHtml();
 		
 		if (! is_null($this->getNext())) {
-			$html = '<p>' . $this->getNextLinkOpen() . $html . $this->getNextLinkClose() . '</p>';
+			$html = '<div id="image_container">' . $this->getNextLinkOpen() . $html . $this->getNextLinkClose() . '</div>';
 		}
 		
 		return $html;

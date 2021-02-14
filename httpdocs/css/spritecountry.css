@@ -3,6 +3,19 @@ body {
 	color: #ddd;
 }
 
+/* ===== Images ===== */
+
+/* Fill screen */
 img#trail_image {
-	width: 85%;
+    width: auto;
+    height: auto;
+    max-width: 95vw;
+    max-height: 95vh;
+}
+
+/* And centre image */
+img#trail_image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
