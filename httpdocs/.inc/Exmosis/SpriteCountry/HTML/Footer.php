@@ -1,6 +1,6 @@
 <?php
 
-namespace Exmosis\SpriteCountry;
+namespace Exmosis\SpriteCountry\HTML;
 
 class Footer {
 
