@@ -1,6 +1,6 @@
 <?php
 
-namespace Exmosis\SpriteCountry;
+namespace Exmosis\SpriteCountry\Data;
 
 use \League\Csv\Reader;
 
@@ -9,13 +9,13 @@ class SpriteCountryData {
 	const FIELD__TRAIL = 'trail_code';
 	const FIELD__SIGNS = 'signs';
 
-	private $data_file;
+	private $trail_data_file;
 	private $data;
 	private $reader;
 
-	public function __construct(String $data_file) {
-		if ($this->dataFileLooksOk($data_file)) {
-			$this->data_file = $data_file;
+	public function __construct(String $trail_data_file) {
+		if ($this->dataFileLooksOk($trail_data_file)) {
+			$this->trail_data_file = $trail_data_file;
 		} else {
 			throw new \Exception('Data file does not look accessible');
 		}
@@ -30,7 +30,7 @@ class SpriteCountryData {
 	}
 
 	public function load() {
-		$this->reader = Reader::createFromPath($this->data_file, 'r');
+		$this->reader = Reader::createFromPath($this->trail_data_file, 'r');
 		$this->reader->setHeaderOffset(0);
 	}
 	
