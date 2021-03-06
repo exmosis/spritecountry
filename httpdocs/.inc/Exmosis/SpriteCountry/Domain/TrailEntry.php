@@ -1,6 +1,6 @@
 <?php
 
-namespace Exmosis\SpriteCountry;
+namespace Exmosis\SpriteCountry\Domain;
 
 /**
  * Class to be extended for TrailTextEntry and TrailImageEntry
@@ -39,6 +39,14 @@ abstract class TrailEntry {
 	
 	public function getId() {
 		return $this->id;
+	}
+	
+	public function getTrailCode() {
+		return $this->trail_code;
+	}
+	
+	public function getTrail() {
+		return $this->trail;	
 	}	
 	
 	public function getNext() {

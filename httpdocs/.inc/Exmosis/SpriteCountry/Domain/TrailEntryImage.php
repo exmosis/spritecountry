@@ -1,6 +1,6 @@
 <?php
 
-namespace Exmosis\SpriteCountry;
+namespace Exmosis\SpriteCountry\Domain;
 
 class TrailEntryImage extends TrailEntry {
 
@@ -24,9 +24,12 @@ class TrailEntryImage extends TrailEntry {
 	}	
 	
 	public function getImageHtml() {
-		$html = '<img id="trail_image" width="500" src="' . TrailRequest::WEB__IMG_BASE_DIR . $this->trail_code . '/' . $this->image . '" />';
+		$html = '<img id="trail_image" width="500" src="' . $this->getImageUrl() . '" />';
 		return $html;
-	} 
-
+	}
+	
+	public function getImageUrl() {
+		return TrailRequest::WEB__IMG_BASE_DIR . $this->trail_code . '/' . $this->image;
+	}
 
 }

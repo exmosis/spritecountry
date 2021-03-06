@@ -1,6 +1,6 @@
 <?php
 
-namespace Exmosis\SpriteCountry;
+namespace Exmosis\SpriteCountry\Domain;
 
 class TrailEntryText extends TrailEntry {
 

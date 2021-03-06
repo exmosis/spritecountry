@@ -1,11 +1,21 @@
 <?php
 
-namespace Exmosis\SpriteCountry;
+namespace Exmosis\SpriteCountry\Domain;
 
+/**
+ * Represents the data for a whole trail.
+ */
 class Trail {
 
 	private $trail_code;
+	private $parent_trail;
+	private $name;
 	private $data;
+		// trail_code
+		// trail_n
+		// text
+		// img_file
+		// signs
 
 	public function __construct(String $trail_code, SpriteCountryData $scd) {
 		$this->trail_code = $trail_code;
@@ -14,6 +24,11 @@ class Trail {
 		foreach ($data as $d) {
 			$this->data[$d['trail_n']] = $d;
 		}
+	}
+
+	public function getName() {
+		// TODO
+		return 'test trail';
 	}
 
 	public function getData() {
@@ -54,6 +69,11 @@ class Trail {
 		return array_keys($this->data);		
 	}
 	
+	public function getFirstId() {
+		$keys = $this->getIds();
+		return $keys[0];
+	}
+	
 	// getEntry(int $id)
 	public function getEntryData(int $id) {
 		if (array_key_exists($id, $this->data)) {
@@ -77,6 +97,14 @@ class Trail {
 		}
 		
 		return $entry;
+	}
+	
+	public function getRandomTrailEntry() {
+		$ids = $this->getIds();
+		shuffle($ids);
+		$random_id = $ids[0];
+		
+		return $this->getTrailEntry($random_id); 		
 	}
 	
 	
