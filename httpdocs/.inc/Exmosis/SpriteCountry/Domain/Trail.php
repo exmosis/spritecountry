@@ -2,41 +2,108 @@
 
 namespace Exmosis\SpriteCountry\Domain;
 
+use Exmosis\SpriteCountry\Data\SpriteCountryTrailData;
+use Exmosis\SpriteCountry\Data\SpriteCountryData;
+
+use Exception;
+
 /**
- * Represents the data for a whole trail.
+ * Represents the data for a whole trail, including encapsulating TrailEntry objects within.
  */
 class Trail {
 
 	private $trail_code;
-	private $parent_trail;
 	private $name;
-	private $data;
-		// trail_code
-		// trail_n
-		// text
-		// img_file
-		// signs
+	private $game;
+	private $publisher;
+	private $url;
+	private $entries; // array
+	
+	// Lesser dependencies
+	
+	private $utef; // UniversalTrailEntryFactory
 
-	public function __construct(String $trail_code, SpriteCountryData $scd) {
+	/**
+	 * Must be created from a Trail dataset and a TrailEntries dataset
+	 * Will populate all properties and TrailEntry items
+	 * 
+	 * @param String $trail_code
+	 * @param SpriteCountryTrailData $sctd
+	 * @param SpriteCountryData $scd
+	 */
+	public function __construct(String $trail_code, SpriteCountryTrailData $sctd, SpriteCountryData $scd) {
+		
 		$this->trail_code = $trail_code;
+		$this->loadFromTrailData($sctd);
+		$this->loadFromTrailEntryData($scd);
+		
+		$this->setUniversalTrailEntryFunction(new UniversalTrailEntryFactory());
+						
+	}
+	
+	public function setUniversalTrailEntryFunction(UniversalTrailEntryFactory $utef) {
+	    $this->utef = $utef;
+	}
+	
+	public function getCode() {
+		return $this->trail_code;
+	}
+	
+	public function getName() {
+		return $this->name;
+	}
+	
+	public function getGame() {
+		return $this->game;
+	}
+	
+	public function getPublisher() {
+		return $this->publisher;
+	}
+	
+	public function getUrl() {
+		return $this->url;
+	}
+	
+	/** 
+	 * Load main trail metadata in
+	 */
+	protected function loadFromTrailData(SpriteCountryTrailData $sctd) {
+		$data = $sctd->getData($this->trail_code);
+		$this->name = $data[0][SpriteCountryTrailData::FIELD__NAME];
+		$this->game = $data[0][SpriteCountryTrailData::FIELD__GAME];
+		$this->publisher = $data[0][SpriteCountryTrailData::FIELD__PUBLISHER];
+		$this->url = $data[0][SpriteCountryTrailData::FIELD__URL];
+	}
+
+	/**
+	 * Turn the passed in data into TrailEntry objects of the right type.
+	 * 
+	 * @param SpriteCountryData $scd
+	 */
+	protected function loadFromTrailEntryData(SpriteCountryData $scd) {
+		
 		$data = $scd->getTrailData($this->trail_code);
-		// Key trail data by trail_n
+
 		foreach ($data as $d) {
-			$this->data[$d['trail_n']] = $d;
+		    // Create a TrailEtry - the Factory will work out what type
+			$entry = $this->utef->create($d, this);
+			// Store locally, keyed by entry ID
+			$this->entries[$entry->getId()] = $entry;
 		}
+		
 	}
 
 	public function getName() {
-		// TODO
-		return 'test trail';
+		return $this->name;
 	}
 
-	public function getData() {
-		return $this->data;
+	public function getTrailEntries() {
+		return $this->entries;
 	}
 
 	public function getLength() {
-		return count($this->data);
+		return count($this->entries);
 	}
 	
 	public function getNextId(int $current_id) {
@@ -44,7 +111,7 @@ class Trail {
 		$counter = 0;
 		$found = false;
 		
-		foreach ($this->data as $n => $data) {
+		foreach (array_keys($this->entries) as $n) {
 			$counter++;
 			if ($found) {
 				// Found it last time, report this key
@@ -66,7 +133,7 @@ class Trail {
 	
 	// getIDs
 	public function getIds() {		
-		return array_keys($this->data);		
+		return array_keys($this->entries);		
 	}
 	
 	public function getFirstId() {
@@ -75,28 +142,12 @@ class Trail {
 	}
 	
 	// getEntry(int $id)
-	public function getEntryData(int $id) {
-		if (array_key_exists($id, $this->data)) {
-			return $this->data[$id];		
+	public function getTrailEntry(int $id) {
+		if (array_key_exists($id, $this->entries)) {
+			return $this->entries[$id];		
 		}
 		
 		throw new Exception('ID not found');
-	}
-	
-	public function getTrailEntry(int $id) {
-		$data = $this->getEntryData($id);
-		
-		// TODO: ERROR CHECK
-		
-		$entry = null; 		
-		
-		if ($data[TrailEntry::KEY__TEXT]) {
-			$entry = new TrailEntryText($this->trail_code, $id, $data, $this);
-		} else {
-			$entry = new TrailEntryImage($this->trail_code, $id, $data, $this);
-		}
-		
-		return $entry;
 	}
 	
 	public function getRandomTrailEntry() {
@@ -106,7 +157,6 @@ class Trail {
 		
 		return $this->getTrailEntry($random_id); 		
 	}
-	
 	
 
 }
