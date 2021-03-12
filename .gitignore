@@ -1,3 +1,13 @@
 # ignore working files
 *~
 
+# ignore vendor
+httpdocs/.inc/vendor
+
+# ignore data
+httpdocs/data
+httpdocs/images
+
+# ignore eclipse
+org.eclipse.*
+.project
