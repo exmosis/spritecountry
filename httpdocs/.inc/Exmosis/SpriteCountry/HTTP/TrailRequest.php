@@ -1,6 +1,7 @@
 <?php
 
 namespace Exmosis\SpriteCountry\HTTP;
+
 use Exception;
 
 class TrailRequest {
