@@ -1,6 +1,8 @@
 <!DOCTYPE HTML>
 <?php
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 // composer load.
@@ -36,7 +38,7 @@ $scd->load();
 			<?php
 				/***** RANDOM TRAIL *****/
 				$trails = $sctd->getShuffledTrails();
-				$trail = new Trail($trails[0][SpriteCountryTrailData::FIELD__TRAIL], $scd);
+				$trail = new Trail($trails[0][SpriteCountryTrailData::FIELD__TRAIL], $sctd, $scd);
 				$entry = $trail->getRandomTrailEntry();
 				$box = new TrailInfoBox($entry);
 				echo $box->getHtml();
