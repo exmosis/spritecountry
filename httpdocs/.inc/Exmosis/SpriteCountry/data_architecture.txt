@@ -8,3 +8,28 @@ SpriteCountryTrailData
 SpriteCountryData
 													TrailEntries
 																	TrailEntry (Text/Image)
+																	
+																	
+																	
+Renderers
+=========
+
+Front page
+	Content
+		Infobox
+			Image
+	
+Image page
+	Header
+	Content
+		Link
+			Image
+	Footer
+
+
+Text page
+	Header
+	Content
+		Link box
+			Text
+	Footer
