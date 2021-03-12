@@ -8,6 +8,7 @@ use Exmosis\SpriteCountry\Domain\Trail;
 use Exmosis\SpriteCountry\Domain\TrailEntry;
 use Exmosis\SpriteCountry\Domain\TrailEntryImage;
 use Exmosis\SpriteCountry\HTML\TrailEntryImageRenderer;
+use Exmosis\SpriteCountry\HTML\TrailEntryTextRenderer;
 use Exmosis\SpriteCountry\HTML\TrailEndingRenderer;
 
 use Exception;
@@ -90,6 +91,11 @@ class TrailRequest {
                 $renderer = new TrailEntryImageRenderer($trail_entry); 
                 $html = $renderer->getHtml();	
                 return $html;
+		    } else {
+		        $renderer = new TrailEntryTextRenderer($trail_entry);
+		        $html = $renderer->getHtml();
+		        return $html;
+		        
 		    }
 		    
 		}
