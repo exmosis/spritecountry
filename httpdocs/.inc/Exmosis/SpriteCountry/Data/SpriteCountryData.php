@@ -34,6 +34,9 @@ class SpriteCountryData {
 		$this->reader->setHeaderOffset(0);
 	}
 	
+	/**
+	 * Gets trail data as a PHP array
+	 **/
 	public function getTrailData(String $trail_code = null) {
 		$records = $this->reader->getRecords();
 

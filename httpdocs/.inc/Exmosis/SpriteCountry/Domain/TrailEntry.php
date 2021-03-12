@@ -62,6 +62,11 @@ abstract class TrailEntry {
 		
 	}
 
+	/** 
+	 * TODO: Move this into separate renderer
+	 * 
+	 * @return string
+	 */
 	public function getNextLinkOpen() {
 		if (! is_null($next = $this->getnext())) {
 			$html = '<a class="next" href="/trail/' . $this->trail_code . '/' . $next->getId() . '">';
@@ -70,6 +75,11 @@ abstract class TrailEntry {
 		return '';
 	}
 
+	/**
+	 * TODO: Move this into separate renderer
+	 * 
+	 * @return string
+	 */
 	public function getNextLinkClose() {
 		if (! is_null($next = $this->getnext())) {
 			$html = '</a>';

@@ -29,6 +29,7 @@ class TrailEntryImage extends TrailEntry {
 	}
 	
 	public function getImageUrl() {
+	    // TODO: Decouple this from WEB__IMG_BASE_DIR
 		return TrailRequest::WEB__IMG_BASE_DIR . $this->trail_code . '/' . $this->image;
 	}
 

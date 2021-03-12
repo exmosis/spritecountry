@@ -13,6 +13,12 @@ class TrailEntryText extends TrailEntry {
 		$this->text = $entry_data[TrailEntry::KEY__TEXT];
 	}
 	
+	/**
+	 * TODO: Move this into a separate renderer.
+	 * 
+	 * {@inheritDoc}
+	 * @see \Exmosis\SpriteCountry\Domain\TrailEntry::getHtml()
+	 */
 	public function getHtml() {
 		$html = '<div id="text_container">';
 		$html .= '<div id="trail_text">' . $this->text . '</div>';
