@@ -1,3 +1,3 @@
 
 RewriteEngine On
-RewriteRule ^trail/([^\/]+)/([0-9]+)/?$ trail.php?path=$1/$2 [NC,L]
+RewriteRule ^trail/([^\/]+)/([0-9]+|end)/?$ trail.php?path=$1/$2 [NC,L]

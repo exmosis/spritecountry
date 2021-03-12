@@ -6,10 +6,11 @@ use Exmosis\SpriteCountry\Data\SpriteCountryTrailData;
 use Exmosis\SpriteCountry\Data\SpriteCountryData;
 use Exmosis\SpriteCountry\Domain\Trail;
 use Exmosis\SpriteCountry\Domain\TrailEntry;
-
-use Exception;
 use Exmosis\SpriteCountry\Domain\TrailEntryImage;
 use Exmosis\SpriteCountry\HTML\TrailEntryImageRenderer;
+use Exmosis\SpriteCountry\HTML\TrailEndingRenderer;
+
+use Exception;
 
 class TrailRequest {
 
@@ -32,11 +33,15 @@ class TrailRequest {
 	}
 	
 	private function convertUrlToParts($url) {
-		if (preg_match('/^\/?([^\/]+)\/?(\d+)?/', $url, $matches)) {
+		if (preg_match('/^\/?([^\/]+)\/?(\d+|end)?/', $url, $matches)) {
 			// default to trail_n = 0
 			$trail_n = 1;
 			if (count($matches) > 2) {
-				// we have a digit specified
+			    // Check for end of trail requested
+			    if ($matches[2] == 'end') {
+			        $trail_n = 'end'; // TODO: Fix this hacky use of an int field...
+			    }
+				// Otherwise we have a digit specified
 				$trail_n = (int) $matches[2];
 			}
 			$trail_code = $matches[1];
@@ -70,6 +75,13 @@ class TrailRequest {
 	public function getHtml() {
 
 		$trail = $this->getTrail();
+		
+		if ($this->trail_n == 'end') {
+		    // special case :-/
+		    $renderer = new TrailEndingRenderer($trail);
+		    return $renderer->getHtml();
+		}
+		
 		$trail_entry = $trail->getTrailEntry($this->trail_n);
 				
 		if (! is_null($trail_entry)) {
