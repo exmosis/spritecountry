@@ -8,10 +8,10 @@ use Exmosis\SpriteCountry\Domain\Trail;
 use Exmosis\SpriteCountry\Domain\TrailEntry;
 
 use Exception;
+use Exmosis\SpriteCountry\Domain\TrailEntryImage;
+use Exmosis\SpriteCountry\HTML\TrailEntryImageRenderer;
 
 class TrailRequest {
-
-	const WEB__IMG_BASE_DIR = '/data/img/';
 
 	// Requested entry args
 	private $trail_code;
@@ -73,8 +73,13 @@ class TrailRequest {
 		$trail_entry = $trail->getTrailEntry($this->trail_n);
 				
 		if (! is_null($trail_entry)) {
-			$html = $trail_entry->getHtml();			
-			return $html;			
+		    
+		    if ($trail_entry instanceof TrailEntryImage) {
+                $renderer = new TrailEntryImageRenderer($trail_entry); 
+                $html = $renderer->getHtml();	
+                return $html;
+		    }
+		    
 		}
 		
 		return '';
