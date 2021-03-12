@@ -50,33 +50,6 @@ class TrailEntryImageRenderer extends TrailEntryRenderer {
         }
     }
     
-    /**
-     * 
-     *
-     * @return string
-     */
-    protected function getNextLinkOpen() {
-        if (! is_null($next = $this->trail_entry->getNext())) {
-            $html = '<a class="next" href="/trail/' . $this->trail_entry->getTrailCode() . '/' . $next->getId() . '">';
-            return $html;
-        }
-        return '';
-    }
-    
-    /**
-     * 
-     *
-     * @return string
-     */
-    protected function getNextLinkClose() {
-        if (! is_null($this->trail_entry->getNext())) {
-            $html = '</a>';
-            return $html;
-        }
-        return '';
-    }
-    
-    
     
 }
 
