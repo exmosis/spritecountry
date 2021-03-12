@@ -11,3 +11,4 @@ httpdocs/images
 # ignore eclipse
 org.eclipse.*
 .project
+/.buildpath
