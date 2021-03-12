@@ -1,15 +1,24 @@
 <?php
 
-namespace Exmosis\SpriteCountry;
+namespace Exmosis\SpriteCountry\HTTP;
+
+use Exmosis\SpriteCountry\HTML\Header;
+use Exmosis\SpriteCountry\HTML\Footer;
+use Exmosis\SpriteCountry\Data\SpriteCountryTrailData;
+use Exmosis\SpriteCountry\Data\SpriteCountryData;
 
 class SpriteCountryRequest {
 
 	const SIGN_URL_PREFIX = '+';
 
 	private $url;
+	private $sctd;
+	private $scd;
 
-	public function __construct(String $url) {
+	public function __construct(String $url, SpriteCountryTrailData $sctd, SpriteCountryData $scd) {
 		$this->url = $url;
+		$this->sctd = $sctd;
+		$this->scd = $scd;
 	}
 	
 	public function process() {
@@ -47,7 +56,7 @@ class SpriteCountryRequest {
 	}
 	
 	private function processTrail(String $url) {
-		$trail_request = new TrailRequest($url);
+		$trail_request = new TrailRequest($url, $this->sctd, $this->scd);
 		
 		$h = new Header('test');
 		$f = new Footer();
