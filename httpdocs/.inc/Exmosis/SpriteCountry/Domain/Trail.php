@@ -32,16 +32,16 @@ class Trail {
 	 * @param SpriteCountryData $scd
 	 */
 	public function __construct(String $trail_code, SpriteCountryTrailData $sctd, SpriteCountryData $scd) {
-		
+
+	    $this->setUniversalTrailEntryFactory(new UniversalTrailEntryFactory());
+	    
 		$this->trail_code = $trail_code;
 		$this->loadFromTrailData($sctd);
 		$this->loadFromTrailEntryData($scd);
-		
-		$this->setUniversalTrailEntryFunction(new UniversalTrailEntryFactory());
 						
 	}
 	
-	public function setUniversalTrailEntryFunction(UniversalTrailEntryFactory $utef) {
+	public function setUniversalTrailEntryFactory(UniversalTrailEntryFactory $utef) {
 	    $this->utef = $utef;
 	}
 	
@@ -87,15 +87,11 @@ class Trail {
 
 		foreach ($data as $d) {
 		    // Create a TrailEtry - the Factory will work out what type
-			$entry = $this->utef->create($d, this);
+			$entry = $this->utef->create($d, $this);
 			// Store locally, keyed by entry ID
 			$this->entries[$entry->getId()] = $entry;
 		}
 		
-	}
-
-	public function getName() {
-		return $this->name;
 	}
 
 	public function getTrailEntries() {
