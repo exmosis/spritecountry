@@ -2,6 +2,9 @@
 
 namespace Exmosis\SpriteCountry\Domain;
 
+// TODO: Decouple.
+use Exmosis\SpriteCountry\HTTP\TrailRequest;
+
 class TrailEntryImage extends TrailEntry {
 
 	protected $image;
