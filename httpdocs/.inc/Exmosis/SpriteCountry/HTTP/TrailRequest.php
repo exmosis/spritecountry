@@ -2,12 +2,14 @@
 
 namespace Exmosis\SpriteCountry\HTTP;
 
+use Exmosis\SpriteCountry\Data\SpriteCountryTrailData;
+use Exmosis\SpriteCountry\Data\SpriteCountryData;
+use Exmosis\SpriteCountry\Domain\Trail;
+use Exmosis\SpriteCountry\Domain\TrailEntry;
+
 use Exception;
 
 class TrailRequest {
-
-	// TODO: de-dupe this vs trail.php
-	const FILE__TRAIL_DATA = 'data/trail_entries.csv';
 
 	const WEB__IMG_BASE_DIR = '/data/img/';
 
@@ -15,9 +17,14 @@ class TrailRequest {
 	private $trail_code;
 	private $trail_n;
 	private $trail;
+	private $sctd;
+	private $scd;
 
-	public function __construct(String $url) {
-		$this->trail = null;		
+	public function __construct(String $url, SpriteCountryTrailData $sctd, SpriteCountryData $scd) {
+	    
+		$this->trail = null;
+		$this->sctd = $sctd;
+		$this->scd = $scd;
 		
 		$parts = $this->convertUrlToParts($url); // may throw exception
 		$this->trail_code = $parts[TrailEntry::KEY__TRAIL_CODE];
@@ -53,10 +60,7 @@ class TrailRequest {
 			throw new Exception('Trail code missing, cannot load data.');		
 		}
 
-		$scd = new SpriteCountryData(TrailRequest::FILE__TRAIL_DATA);
-		$scd->load();
-
-		$trail = new Trail($this->trail_code, $scd);
+		$trail = new Trail($this->trail_code, $this->sctd, $this->scd);
 		// store in case called again
 		$this->trail = $trail;
 		return $this->trail;
