@@ -13,6 +13,7 @@ require_once '.inc' . DIRECTORY_SEPARATOR . 'Exmosis' . DIRECTORY_SEPARATOR . 'a
 use Exmosis\SpriteCountry\Data\SpriteCountryData;
 use Exmosis\SpriteCountry\Data\SpriteCountryTrailData;
 use Exmosis\SpriteCountry\Domain\Trail;
+use Exmosis\SpriteCountry\HTML\Header;
 use Exmosis\SpriteCountry\HTML\TrailInfoBox;
 
 $sctd = new SpriteCountryTrailData('data/trails.csv');
@@ -24,7 +25,7 @@ $scd->load();
 ?>
 <html>
 	<head>
-		<title>' . Header::HEADER_PREFIX . $this->title . '</title>
+		<title><?php echo Header::HEADER_PREFIX; ?></title>
 		<link rel="stylesheet" href="/css/spritecountry.css">
 	</head>
 	<body>
