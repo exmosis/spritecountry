@@ -5,8 +5,6 @@ namespace Exmosis\SpriteCountry\HTML;
 use Exmosis\SpriteCountry\Domain\TrailEntry;
 use Exmosis\SpriteCountry\Domain\TrailEntryImage;
 
-use Exception;
-
 class TrailEntryImageRenderer extends TrailEntryRenderer {
 
     // temporary til we sort out config
