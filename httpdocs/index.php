@@ -13,6 +13,7 @@ require_once '.inc' . DIRECTORY_SEPARATOR . 'Exmosis' . DIRECTORY_SEPARATOR . 'a
 use Exmosis\SpriteCountry\Data\SpriteCountryData;
 use Exmosis\SpriteCountry\Data\SpriteCountryTrailData;
 use Exmosis\SpriteCountry\Domain\Trail;
+use Exmosis\SpriteCountry\Domain\TrailEntryImage;
 use Exmosis\SpriteCountry\HTML\Header;
 use Exmosis\SpriteCountry\HTML\TrailInfoBox;
 
@@ -40,7 +41,10 @@ $scd->load();
 				/***** RANDOM TRAIL *****/
 				$trails = $sctd->getShuffledTrails();
 				$trail = new Trail($trails[0][SpriteCountryTrailData::FIELD__TRAIL], $sctd, $scd);
-				$entry = $trail->getRandomTrailEntry();
+				$entry = null;
+				while (! $entry instanceof TrailEntryImage) {
+				    $entry = $trail->getRandomTrailEntry();
+				}
 				$box = new TrailInfoBox($entry);
 				echo $box->getHtml();
 			?>
