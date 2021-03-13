@@ -28,14 +28,14 @@ $scd->load();
 		<title><?php echo Header::HEADER_PREFIX; ?></title>
 		<link rel="stylesheet" href="/css/spritecountry.css">
 	</head>
-	<body>
+	<body id="homepage">
 		<div id="wrap">
 		
-			<div id="index_head">
+			<div id="index_head" class="section_wrap">
 				Sprite Country...
 			</div>
 			
-			<div id="trail_menu">
+			<div id="trail_menu" class="section_wrap">
 			<?php
 				/***** RANDOM TRAIL *****/
 				$trails = $sctd->getShuffledTrails();
