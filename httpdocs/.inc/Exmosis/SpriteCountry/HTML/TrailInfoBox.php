@@ -2,6 +2,7 @@
 
 namespace Exmosis\SpriteCountry\HTML;
 
+use Exmosis\SpriteCountry\Domain\TrailEntryImage;
 use Exmosis\SpriteCountry\Domain\TrailEntry;
 
 class TrailInfoBox {
@@ -32,7 +33,7 @@ class TrailInfoBox {
 		$link = '/trail/' . $this->trail->getCode() . '/' . $link_id;
 		
 		$html .= ' <div class="trail_entry_box" id="' . $box_id . '">' . "\n";
-		$html .= '  <div class="trail_summary" style="--trail-img: url(\'' . $img . '\')">' . "\n";
+		$html .= '  <div class="trail_summary" style="--trail-img: url(\'' . HtmlConfig::WEBPATH__TRAIL_IMAGES . $img . '\')">' . "\n";
 		$html .= '   <div class="trail_name">' . 
 		         '     <a href="' . $link . '">' . $this->trail->getName() . '</a></div>' . "\n";
 		$html .= '  </div>' . "\n";
