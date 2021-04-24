@@ -39,11 +39,29 @@ $scd->load();
 				</div>
 			</div>
 			
+			<div id="intro" class="section_wrap">
+				<p>A log of trails through virtual grain</p>
+			</div>
+			
+			<?php
+				/***** RANDOM TRAILS *****/
+				$trails = $sctd->getShuffledTrails();
+            ?>
+            
 			<div id="trail_menu" class="section_wrap">
 			<?php
-				/***** RANDOM TRAIL *****/
-				$trails = $sctd->getShuffledTrails();
 				$trail = new Trail($trails[0][SpriteCountryTrailData::FIELD__TRAIL], $sctd, $scd);
+				$entry = null;
+				while (! $entry instanceof TrailEntryImage) {
+				    $entry = $trail->getRandomTrailEntry();
+				}
+				$box = new TrailInfoBox($entry);
+				echo $box->getHtml();
+			?>
+			</div>		
+			<div id="trail_menu" class="section_wrap">
+			<?php
+				$trail = new Trail($trails[1][SpriteCountryTrailData::FIELD__TRAIL], $sctd, $scd);
 				$entry = null;
 				while (! $entry instanceof TrailEntryImage) {
 				    $entry = $trail->getRandomTrailEntry();
