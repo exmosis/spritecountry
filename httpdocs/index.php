@@ -33,7 +33,10 @@ $scd->load();
 		<div id="wrap">
 		
 			<div id="index_head" class="section_wrap">
-				Sprite Country...
+				<img src="/media/spritecountry_doticon_logo.png" width="100" height="100" id="site_logo">
+				<div id="head_title">
+					Sprite<br />Country
+				</div>
 			</div>
 			
 			<div id="trail_menu" class="section_wrap">
