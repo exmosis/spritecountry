@@ -39,20 +39,18 @@ div#text_container {
 }
 
 div#trail_text {
-	font-size: 1.5em;
+	font-size: 2em;
 	line-height: 150%;
 	color: #e0e0e0;
 }
 
-div#text_container a.next {
-	font-size: 2em;
-	color: #c0c0c0;
+div#trail_text a {
 	text-decoration: none;
-	
-	display: block;
-	position: absolute;
-	top: 0.5em;
-	right: 3em;	
+}
+
+div#trail_text a:visited {
+	color: #e0e0e0;
+	text-decoration: none;
 }
 
 /* ===== Homepage ===== */
