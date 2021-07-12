@@ -40,7 +40,7 @@ $scd->load();
 			</div>
 			
 			<div id="intro" class="section_wrap">
-				<p>A log of trails through virtual grain</p>
+				<p>A labyrinth gallery of videogame photography</p>
 			</div>
 			
 			<?php
@@ -58,18 +58,7 @@ $scd->load();
 				$box = new TrailInfoBox($entry);
 				echo $box->getHtml();
 			?>
-			</div>		
-			<div id="trail_menu" class="section_wrap">
-			<?php
-				$trail = new Trail($trails[1][SpriteCountryTrailData::FIELD__TRAIL], $sctd, $scd);
-				$entry = null;
-				while (! $entry instanceof TrailEntryImage) {
-				    $entry = $trail->getRandomTrailEntry();
-				}
-				$box = new TrailInfoBox($entry);
-				echo $box->getHtml();
-			?>
-			</div>		
+			</div>	
 		
 		</div>
 	</body>
