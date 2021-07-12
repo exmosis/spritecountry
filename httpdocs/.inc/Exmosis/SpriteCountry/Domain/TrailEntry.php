@@ -28,7 +28,13 @@ abstract class TrailEntry {
 	public function __construct(String $trail_code, int $id, array $entry_data, Trail $trail = null) {
 		
 		$this->trail_code = $trail_code;
-		$this->id = $id;			
+		$this->id = $id;
+
+	    // Convert incoming signs into an array
+		$this->signs = explode(',', $entry_data[self::KEY__SIGNS]);
+		if (count($this->signs) == 1 && trim($this->signs[0]) == '') {
+		    $this->signs = array();
+		}
 		
 		// Store the trail that this entry belongs to
 		$this->trail = $trail;
@@ -41,6 +47,13 @@ abstract class TrailEntry {
 	
 	public function getTrailCode() {
 		return $this->trail_code;
+	}
+	
+	/**
+	 * @return array Array of strings, one for each sign attached
+	 */
+	public function getSigns() {
+	    return $this->signs;
 	}
 	
 	public function getTrail() {
