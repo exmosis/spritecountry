@@ -55,5 +55,14 @@ abstract class TrailEntryRenderer {
     }
     
     
+    protected function getListOfSignsAsLinks() {
+        $ul = '<ul id="trail_signs">';
+        foreach ($this->trail_entry->getSigns() as $sign) {
+            $ul .= '<li><a href="">' . $sign . '</a></li>';
+        }
+        $ul .= '</ul>';
+        return $ul;
+    }
+    
     
 }
