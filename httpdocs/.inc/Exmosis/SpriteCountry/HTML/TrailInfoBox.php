@@ -10,12 +10,22 @@ class TrailInfoBox {
 	protected $entry;
 	protected $trail;
 
+	/**
+	 * 
+	 * @param TrailEntry $entry
+	 */
 	public function __construct(TrailEntry $entry) {
 		$this->entry = $entry;
 		$this->trail = $entry->getTrail();
 	}
 
-	public function getHtml($link_to_trail_start = true) {
+	/**
+	 * 
+	 * @param bool $link_to_trail_start Set to false to link direct to image instead of start of trail
+	 * @param bool $hide_name Set to true to remove div containing name of trail
+	 * @return string HTML for element
+	 */
+	public function getHtml(bool $link_to_trail_start = true, bool $hide_name = false) {
 		$html = '';
 		
 		$box_id = "trail_entry_box_" . $this->trail->getCode() . "_" . $this->entry->getId();	
@@ -33,9 +43,12 @@ class TrailInfoBox {
 		$link = '/trail/' . $this->trail->getCode() . '/' . $link_id;
 		
 		$html .= ' <div class="trail_entry_box" id="' . $box_id . '">' . "\n";
+		$html .= '  <a class="box_link" href="' . $link . '">&nbsp;</a>' . "\n";
 		$html .= '  <div class="trail_summary" style="--trail-img: url(\'' . HtmlConfig::WEBPATH__TRAIL_IMAGES . $img . '\')">' . "\n";
-		$html .= '   <div class="trail_name">' . 
-		         '     <a href="' . $link . '">' . $this->trail->getName() . '</a></div>' . "\n";
+		if (! $hide_name) {
+		  $html .= '   <div class="trail_name">' . 
+		             '     <a href="' . $link . '">' . $this->trail->getName() . '</a></div>' . "\n";
+		}
 		$html .= '  </div>' . "\n";
 		$html .= ' </div>' . "\n";
 		

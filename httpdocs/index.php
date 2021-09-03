@@ -56,7 +56,7 @@ $scd->load();
 				    $entry = $trail->getRandomTrailEntry();
 				}
 				$box = new TrailInfoBox($entry);
-				echo $box->getHtml();
+				echo $box->getHtml(true, true);
 			?>
 			</div>	
 		

@@ -100,6 +100,26 @@ div.trail_entry_box {
 	display: block;
 	width: 400px;
 	height: 300px;
+	position: relative;
+}
+
+div.trail_entry_box:hover {
+   cursor: hand;
+   cursor: pointer;
+   opacity: .9;
+}
+
+div.trail_entry_box a.box_link {
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	text-decoration: none;
+	z-index: 10;
+	opacity: 0;
+	filter: alpha(opacity=0);
 }
 
 div.trail_entry_box div.trail_summary {
@@ -108,6 +128,7 @@ div.trail_entry_box div.trail_summary {
 	height: 100%;
 	background-image: var(--trail-img);
 	background-size: 100% 100%;
+	position: absolute;
 }
 
 div.trail_summary .trail_name {
