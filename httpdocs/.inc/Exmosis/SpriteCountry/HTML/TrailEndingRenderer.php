@@ -52,7 +52,10 @@ class TrailEndingRenderer {
             
         }
         // $html = '<p><span class="trail_info_key">Game:</span><span class="trail_info_value">' . $this->trail->getGame() . '</span></p>';
-        $html .= '<p><a href="/">Return</a></p>';
+        $html .= '<p><a href="/" class="return_link">&lt; Return</a></p>';
+        
+        $html = '<div id="text_container">' .
+                '<div id="trail_text">' . $html . '</div></div>';
         
         return $html;
     }
