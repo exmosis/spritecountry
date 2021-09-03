@@ -10,6 +10,7 @@ class SpriteCountryTrailData {
 	const FIELD__TRAIL = 'trail_code';
 	const FIELD__NAME = 'name';
 	const FIELD__GAME = 'game';
+	const FIELD__DEVELOPER = 'developer';
 	const FIELD__PUBLISHER = 'publisher';	
 	const FIELD__URL = 'url';
 

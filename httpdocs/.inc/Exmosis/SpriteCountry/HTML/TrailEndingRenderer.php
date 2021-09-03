@@ -22,7 +22,7 @@ class TrailEndingRenderer {
             ),
             array(
                 'key' => 'Developer',
-                'value' => '',
+                'value' => $this->trail->getDeveloper(),
                 'is_link' => false
             ),
             array(

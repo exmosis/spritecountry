@@ -15,6 +15,7 @@ class Trail {
 	private $trail_code;
 	private $name;
 	private $game;
+	private $developer;
 	private $publisher;
 	private $url;
 	private $entries; // array
@@ -57,6 +58,10 @@ class Trail {
 		return $this->game;
 	}
 	
+	public function getDeveloper() {
+	    return $this->developer;
+	}
+	
 	public function getPublisher() {
 		return $this->publisher;
 	}
@@ -72,6 +77,7 @@ class Trail {
 		$data = $sctd->getData($this->trail_code);
 		$this->name = $data[0][SpriteCountryTrailData::FIELD__NAME];
 		$this->game = $data[0][SpriteCountryTrailData::FIELD__GAME];
+		$this->developer = $data[0][SpriteCountryTrailData::FIELD__DEVELOPER];
 		$this->publisher = $data[0][SpriteCountryTrailData::FIELD__PUBLISHER];
 		$this->url = $data[0][SpriteCountryTrailData::FIELD__URL];
 	}
