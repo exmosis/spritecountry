@@ -1,3 +1,7 @@
-
+<IfModule mod_rewrite.c>
 RewriteEngine On
-RewriteRule ^trail/([^\/]+)/([0-9]+|end)/?$ trail.php?path=$1/$2 [NC,L]
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^trail/([^\/]+)/([0-9]+|end)/?$ index_trail.php?path=$1/$2 [NC,L]
+</IfModule>
