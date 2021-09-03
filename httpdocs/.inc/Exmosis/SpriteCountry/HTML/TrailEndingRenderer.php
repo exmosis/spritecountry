@@ -13,7 +13,45 @@ class TrailEndingRenderer {
     }
     
     public function getHtml() {
-        $html = '<p>' . $this->trail->getGame() . '</p>';
+        
+        $trail_info_meta = array(
+            array(
+                'key' => 'Game',
+                'value' => $this->trail->getName(),
+                'is_link' => false
+            ),
+            array(
+                'key' => 'Developer',
+                'value' => '',
+                'is_link' => false
+            ),
+            array(
+                'key' => 'Publisher',
+                'value' => $this->trail->getPublisher(),
+                'is_link' => false
+            ),
+            array(
+                'key' => 'Link',
+                'value' => $this->trail->getUrl(),
+                'is_link' => true
+            ),
+        );
+        
+        $html = '';
+        foreach ($trail_info_meta as $meta) {
+            $meta_key = $meta['key'];
+            $meta_value = $meta['value'];
+            $is_link = $meta['is_link'];
+            
+            if ($is_link) {
+                $meta_value = '<a href="' . $meta_value . '">' . $meta_value . '</a>';
+            }
+            
+            $html .= '<p><span class="trail_info_key">' . $meta_key . ': </span>' .
+                     '<span class="trail_info_value">' . $meta_value . '</span></p>' . "\n";
+            
+        }
+        // $html = '<p><span class="trail_info_key">Game:</span><span class="trail_info_value">' . $this->trail->getGame() . '</span></p>';
         $html .= '<p><a href="/">Return</a></p>';
         
         return $html;
