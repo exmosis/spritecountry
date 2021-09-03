@@ -59,6 +59,32 @@ $scd->load();
 				echo $box->getHtml(true, true);
 			?>
 			</div>	
+
+			<div id="newsletter_form" class="section_wrap">
+            <form
+              action="https://buttondown.email/api/emails/embed-subscribe/sprite_country"
+              method="post"
+              target="popupwindow"
+              onsubmit="window.open('https://buttondown.email/sprite_country', 'popupwindow')"
+              class="embeddable-buttondown-form"
+            >
+              <p>
+              <label for="bd-email">Subscribe to get updates, including new trails and new features being added:</label>
+              </p>
+              <div>
+              <input type="email" name="email" id="bd-email" />
+              <input type="hidden" value="1" name="embed" />
+              <input type="submit" value="Subscribe" />
+              </div>
+              <p>
+                <a href="https://buttondown.email" target="_blank">Powered by Buttondown</a>
+              </p>
+            </form>
+			</div>
+			
+			<!-- div id="instructions" class="section_wrap">
+				<p>Click to enter.<br />Click/tap anywhere on the screen to advance.<br />Choose a symbol to sidestep.</p>
+			</div -->
 		
 		</div>
 	</body>
