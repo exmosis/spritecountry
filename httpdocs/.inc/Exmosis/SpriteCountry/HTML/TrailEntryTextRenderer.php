@@ -28,6 +28,7 @@ class TrailEntryTextRenderer extends TrailEntryRenderer {
 
         $html = '<div id="text_container">';
         $html .= '<div id="trail_text">' . $text . '</div>';
+        $html .= $this->getNextLinkFullScreen();
         $html .= '</div>';
         return $html;
     }   

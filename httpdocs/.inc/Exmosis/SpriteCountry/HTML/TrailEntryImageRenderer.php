@@ -25,8 +25,10 @@ class TrailEntryImageRenderer extends TrailEntryRenderer {
         $html = '
             <div id="image_container">
                 ' . $html . '
+                ' . $this->getNextLinkFullScreen() . '
             </div>
         ';
+        $html .= $this->getListOfSignsAsLinks();
         return $html;
     }
     

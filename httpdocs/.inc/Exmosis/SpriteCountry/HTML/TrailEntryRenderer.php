@@ -21,9 +21,9 @@ abstract class TrailEntryRenderer {
      *
      * @return string
      */
-    protected function getNextLinkOpen() {
+    protected function getNextLinkOpen(String $css_class = "next") {
         if (! is_null($next = $this->trail_entry->getNext())) {
-            $html = '<a class="next" href="/trail/' . $this->trail_entry->getTrailCode() . '/' . $next->getId() . '">';
+            $html = '<a class="' . $css_class . '" href="/trail/' . $this->trail_entry->getTrailCode() . '/' . $next->getId() . '">';
             return $html;
         }
         return '';
@@ -40,6 +40,14 @@ abstract class TrailEntryRenderer {
             return $html;
         }
         return '';
+    }
+    
+    /**
+     * 
+     * @return string HTML containing link with CSS to turn into full screen link
+     */
+    public function getNextLinkFullScreen() {
+        return $this->getNextLinkOpen('full_screen_link') . '&nbsp;' . $this->getNextLinkClose();
     }
     
     protected function wrapInLinkToInfoPage(String $html_text) {

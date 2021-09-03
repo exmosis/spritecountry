@@ -3,6 +3,18 @@ body {
 	color: #ddd;
 }
 
+/* ===== All Trail Entries ===== */
+
+a.full_screen_link {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 10;
+	display: block;
+}
+
 /* ===== Images ===== */
 
 /* Fill screen */
