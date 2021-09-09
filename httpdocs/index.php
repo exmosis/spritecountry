@@ -22,7 +22,7 @@ $sctd->load();
 
 $scd = new SpriteCountryData('data/trail_entries.csv');
 $scd->load();
- 	
+
 ?>
 <html>
 	<head>
@@ -44,13 +44,28 @@ $scd->load();
 			</div>
 			
 			<?php
-				/***** RANDOM TRAILS *****/
+
+			$trail_code = null;
+			
+			/***** CHECK FOR REQUESTED TRAIL *****/
+			if (array_key_exists('trail', $_GET)) {
+			    $trails = $sctd->getData($_GET['trail']);
+			    if (count($trails) == 1) {
+			        // got data back so use it
+			        $trail_code = $trails[0][SpriteCountryTrailData::FIELD__TRAIL];
+			    }
+			}
+			
+			/***** USE RANDOM TRAIL IF NOT REQUESTED OR NOT FOUND *****/
+			if (is_null($trail_code)) {
 				$trails = $sctd->getShuffledTrails();
+				$trail_code = $trails[0][SpriteCountryTrailData::FIELD__TRAIL];
+			}
             ?>
             
 			<div id="trail_menu" class="section_wrap">
 			<?php
-				$trail = new Trail($trails[0][SpriteCountryTrailData::FIELD__TRAIL], $sctd, $scd);
+			    $trail = new Trail($trail_code, $sctd, $scd);
 				$entry = null;
 				while (! $entry instanceof TrailEntryImage) {
 				    $entry = $trail->getRandomTrailEntry();
