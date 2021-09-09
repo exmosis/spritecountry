@@ -44,7 +44,7 @@ class TrailEndingRenderer {
             $is_link = $meta['is_link'];
             
             if ($is_link) {
-                $meta_value = '<a href="' . $meta_value . '">' . $meta_value . '</a>';
+                $meta_value = '<a href="' . $meta_value . '" target="_blank">' . $meta_value . '</a>';
             }
             
             $html .= '<p><span class="trail_info_key">' . $meta_key . ': </span>' .
