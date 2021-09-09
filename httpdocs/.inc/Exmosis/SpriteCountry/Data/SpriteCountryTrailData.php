@@ -39,6 +39,15 @@ class SpriteCountryTrailData {
 		$this->reader->setHeaderOffset(0);
 	}
 	
+	/**
+	 * Get data for all trails or a specific trail.
+	 * If $trail_data is null or omitted, all trail data will be returned.
+	 * If $trail_code was specified and exists, returned array will contain just one entry.
+	 * If $trail_code was specified but does not exist, an empty array will be returned.
+	 * 
+	 * @param String $trail_code
+	 * @return array An array of trail entries. 
+	 */
 	public function getData(String $trail_code = null) {
 		$records = $this->reader->getRecords();
 
