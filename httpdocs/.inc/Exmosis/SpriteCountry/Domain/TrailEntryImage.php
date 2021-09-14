@@ -16,5 +16,15 @@ class TrailEntryImage extends TrailEntry {
 	public function getImageUrl() {
 		return $this->trail_code . '/' . $this->image;
 	}
+	
+	/**
+	 * Returns URL for an optimised image - currently this uses the webp format, which the site
+	 * expects to be stored in 'webp/<image.base>.webp'
+	 * 
+	 * @return string URL of optimised image
+	 */
+	public function getOptimisedImageUrl() {
+	    return $this->trail_code . '/webp/' . $this->image . '.webp';
+	}
 
 }

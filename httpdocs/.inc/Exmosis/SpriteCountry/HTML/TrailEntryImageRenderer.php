@@ -10,6 +10,8 @@ class TrailEntryImageRenderer extends TrailEntryRenderer {
     // temporary til we sort out config
     const WEB__IMG_BASE_DIR = '/data/img/';
     
+    private $optimise_image = true;
+    
     public function __construct(TrailEntry $trail_entry) {
         
         if (! $trail_entry instanceof TrailEntryImage) {
@@ -38,7 +40,11 @@ class TrailEntryImageRenderer extends TrailEntryRenderer {
     }
     
     protected function getImageUrl() {
-        $rel_path = $this->trail_entry->getImageUrl();
+        if ($this->optimise_image) {
+            $rel_path = $this->trail_entry->getOptimisedImageUrl();
+        } else {
+            $rel_path = $this->trail_entry->getImageUrl();
+        }
         return self::WEB__IMG_BASE_DIR . $rel_path;
     }
     
