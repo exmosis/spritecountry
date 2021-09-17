@@ -35,7 +35,12 @@ class SignsRenderer {
         
     }
     
-    public function getHTML() {
+    /**
+     * 
+     * @param String $from_entry_ref Originating link, in the form of trail_code/n
+     * @return string HTML
+     */
+    public function getHTML(String $from_entry_ref) {
         $html = '';
         
         if (count($this->signs) > 0) {
@@ -45,7 +50,7 @@ class SignsRenderer {
                 foreach ($this->signs_lookup as $check_sign) {
                     if ($check_sign->getSignCode() == $sign) {
                         // Match found, so use the matched Sign class
-                        $html .= '<li><a href="/sign/' . $check_sign->getSignCode() . '">' . $check_sign->getDisplayText() . '</a></li>';
+                        $html .= '<li><a href="/sign/' . $check_sign->getSignCode() . '/' . $from_entry_ref . '">' . $check_sign->getDisplayText() . '</a></li>';
                     }
                 }
             }
