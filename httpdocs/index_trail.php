@@ -13,6 +13,8 @@ require_once '.inc' . DIRECTORY_SEPARATOR . 'Exmosis' . DIRECTORY_SEPARATOR . 'a
 use Exmosis\SpriteCountry\HTTP\SpriteCountryRequest;
 use Exmosis\SpriteCountry\Data\SpriteCountryTrailData;
 use Exmosis\SpriteCountry\Data\SpriteCountryData;
+use Exmosis\SpriteCountry\Data\Signs;
+use Exmosis\SpriteCountry\Data\SignsData;
 
 $sctd = new SpriteCountryTrailData('data/trails.csv');
 $sctd->load();
@@ -20,10 +22,14 @@ $sctd->load();
 $scd = new SpriteCountryData('data/trail_entries.csv');
 $scd->load();
 
+$signdata = new SignsData('data/signs.csv');
+$signdata->load();
+
 // oh wait, the Request object handles types of URL, duh.
-// TODO: turn trail.php into index.php
+// But index doesn't need to load sign data, so...
+// TODO: Maybe turn index_trail.php into index.php?
 if (array_key_exists('path', $_GET)) {
-	$req = new SpriteCountryRequest($_GET['path'], $sctd, $scd);
+	$req = new SpriteCountryRequest($_GET['path'], $sctd, $scd, $signdata);
 	$req->process();
 }
 
