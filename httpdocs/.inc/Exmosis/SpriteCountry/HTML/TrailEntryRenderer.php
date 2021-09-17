@@ -4,7 +4,19 @@ namespace Exmosis\SpriteCountry\HTML;
 
 abstract class TrailEntryRenderer {
 
+    // TrailEntry to render
     protected $trail_entry;
+    // Info about all possible signs
+    protected array $sign_lookup;
+    
+    public function __construct($trail_entry, array $sign_lookup = array()) {
+
+        // Currently child classes need to do their own validation on $trail_entry
+        
+        $this->trail_entry = $trail_entry;
+        $this->sign_lookup = $sign_lookup;
+        
+    }
     
     abstract public function getHtml();
     
@@ -64,12 +76,8 @@ abstract class TrailEntryRenderer {
     
     
     protected function getListOfSignsAsLinks() {
-        $ul = '<ul id="trail_signs">';
-        foreach ($this->trail_entry->getSigns() as $sign) {
-            $ul .= '<li><a href="">' . $sign . '</a></li>';
-        }
-        $ul .= '</ul>';
-        return $ul;
+        $signs_renderer = new SignsRenderer($this->trail_entry->getSigns(), $this->sign_lookup);
+        return $signs_renderer->getHTML();
     }
     
     

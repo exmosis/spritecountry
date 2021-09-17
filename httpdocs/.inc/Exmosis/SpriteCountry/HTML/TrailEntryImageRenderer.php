@@ -11,14 +11,15 @@ class TrailEntryImageRenderer extends TrailEntryRenderer {
     const WEB__IMG_BASE_DIR = '/data/img/';
     
     private $optimise_image = true;
-    
-    public function __construct(TrailEntry $trail_entry) {
+        
+    public function __construct(TrailEntry $trail_entry, array $sign_lookup = array()) {
         
         if (! $trail_entry instanceof TrailEntryImage) {
             throw Exception('TrailEntryImageRenderer needs a TrailEntryImage');
         }
         
-        $this->trail_entry = $trail_entry;
+        parent::__construct($trail_entry, $sign_lookup);
+        
     }
     
     public function getHtml() {

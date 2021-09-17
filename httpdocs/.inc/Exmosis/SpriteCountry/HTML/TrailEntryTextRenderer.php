@@ -9,14 +9,16 @@ use Exception;
 
 class TrailEntryTextRenderer extends TrailEntryRenderer {
     
-    public function __construct(TrailEntry $trail_entry) {
+    public function __construct(TrailEntry $trail_entry, array $sign_lookup = array()) {
         
         if (! $trail_entry instanceof TrailEntryText) {
-            throw Exception('TrailEntryTextRenderer needs a TrailEntryText');
+            throw Exception('TrailEntryImageRenderer needs a TrailEntryText');
         }
         
-        $this->trail_entry = $trail_entry;
+        parent::__construct($trail_entry, $sign_lookup);
+        
     }
+    
     
     public function getHtml() {
         return $this->getTextHtml();
