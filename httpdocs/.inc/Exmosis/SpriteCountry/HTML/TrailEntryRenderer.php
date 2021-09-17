@@ -77,7 +77,7 @@ abstract class TrailEntryRenderer {
     
     protected function getListOfSignsAsLinks() {
         $signs_renderer = new SignsRenderer($this->trail_entry->getSigns(), $this->sign_lookup);
-        return $signs_renderer->getHTML();
+        return $signs_renderer->getHTML($this->trail_entry->getPathRef());
     }
     
     
