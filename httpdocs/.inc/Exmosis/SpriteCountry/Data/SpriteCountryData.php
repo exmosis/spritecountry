@@ -7,6 +7,9 @@ use \League\Csv\Reader;
 class SpriteCountryData {
 
 	const FIELD__TRAIL = 'trail_code';
+	const FIELD__N = 'trail_n';
+	const FIELD__TEXT = 'text';
+	const FIELD__IMG_FILE = 'img_file';
 	const FIELD__SIGNS = 'signs';
 
 	private $trail_data_file;
