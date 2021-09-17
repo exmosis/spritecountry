@@ -7,7 +7,7 @@ abstract class TrailEntryRenderer {
     // TrailEntry to render
     protected $trail_entry;
     // Info about all possible signs
-    protected array $sign_lookup;
+    protected $sign_lookup;
     
     public function __construct($trail_entry, array $sign_lookup = array()) {
 
