@@ -31,7 +31,7 @@ class TrailInfoBox {
 		$box_id = "trail_entry_box_" . $this->trail->getCode() . "_" . $this->entry->getId();	
 		$img = 'data/img/entry_default_img.jpg';
 		if ($this->entry instanceof TrailEntryImage) {
-			$img = $this->entry->getImageUrl();
+		    $img = $this->entry->getOptimisedImageUrl();
 		}
 		
 		$link_id = $this->entry->getId();
