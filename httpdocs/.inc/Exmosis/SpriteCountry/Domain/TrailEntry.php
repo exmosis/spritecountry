@@ -50,6 +50,15 @@ abstract class TrailEntry {
 	}
 	
 	/**
+	 * Gets URL-style reference ot this trail entry in the form of "<trail_code>/<id>"
+	 * 
+	 * @return string
+	 */
+	public function getPathRef() {
+	    return $this->getTrailCode() . '/' . $this->getId();
+	}
+	
+	/**
 	 * @return array Array of strings, one for each sign attached
 	 */
 	public function getSigns() {
