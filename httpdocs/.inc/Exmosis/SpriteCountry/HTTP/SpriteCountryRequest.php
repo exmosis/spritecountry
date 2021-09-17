@@ -10,7 +10,7 @@ use Exmosis\SpriteCountry\Data\SignsData;
 
 class SpriteCountryRequest {
 
-	const SIGN_URL_PREFIX = '+';
+	const SIGN_URL_PREFIX = 'sign/';
 
 	private $url;
 	private $sctd;
@@ -29,7 +29,7 @@ class SpriteCountryRequest {
 			$this->goToIndex();
 			exit;
 		}
-		
+
 		$is_sign = $this->urlLooksLikeSign($this->url);
 		if ($is_sign) {
 			$sign = ltrim($this->url, SpriteCountryRequest::SIGN_URL_PREFIX);
@@ -47,15 +47,40 @@ class SpriteCountryRequest {
 	}
 	
 	private function goToIndex() {
+	    header('Location: /');
+	    exit;
 	}
 	
-	private function processSign(String $sign) {
-		if ($sign == '') {
+	/**
+	 * Incoming $sign_url will look like <sign>/<trail_code>/<n>
+	 * 
+	 * This will redirect one way or another.
+	 * 
+	 * @param String $sign_url
+	 */
+	private function processSign(String $sign_url) {
+		if ($sign_url == '') {
 			$this->goToIndex();
-			exit;
+			// exits
+		}
+
+		$sign_url_parts = explode('/', $sign_url);
+		if (count($sign_url_parts) != 3) {
+		    $this->goToIndex();
+		    // exits
 		}
 		
-		// TODO: new Sign Object		
+		$sign = $sign_url_parts[0];
+		$entry_trail_code = $sign_url_parts[1];
+		$entry_trail_n = (int) $sign_url_parts[2];
+
+		$sr = new SignRequest($sign, $this->scd, $entry_trail_code . '/' . $entry_trail_n);
+		$sr->sendRedirect(); // exits if redirect happens
+		
+		// If that failed for any reason, redirect to index too
+		$this->goToIndex();
+		// exits;
+		
 	}
 	
 	private function processTrail(String $url) {

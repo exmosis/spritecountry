@@ -4,4 +4,7 @@ RewriteBase /
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^trail/([^\/]+)/([0-9]+|end)/?$ index_trail.php?path=$1/$2 [NC,L]
+
+# Unnecessary splitting and re-writing of sign and entry point but hey hum.
+RewriteRule ^sign/([^\/]+)/([^\/]+/[0-9+]+)/?$ index_trail.php?path=sign/$1/$2 [NC,L]
 </IfModule>
