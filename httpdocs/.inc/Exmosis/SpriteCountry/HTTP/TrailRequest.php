@@ -4,12 +4,14 @@ namespace Exmosis\SpriteCountry\HTTP;
 
 use Exmosis\SpriteCountry\Data\SpriteCountryTrailData;
 use Exmosis\SpriteCountry\Data\SpriteCountryData;
+use Exmosis\SpriteCountry\Data\SignsData;
 use Exmosis\SpriteCountry\Domain\Trail;
 use Exmosis\SpriteCountry\Domain\TrailEntry;
 use Exmosis\SpriteCountry\Domain\TrailEntryImage;
 use Exmosis\SpriteCountry\HTML\TrailEntryImageRenderer;
 use Exmosis\SpriteCountry\HTML\TrailEntryTextRenderer;
 use Exmosis\SpriteCountry\HTML\TrailEndingRenderer;
+use Exmosis\SpriteCountry\Domain\Sign;
 
 use Exception;
 
@@ -21,12 +23,17 @@ class TrailRequest {
 	private $trail;
 	private $sctd;
 	private $scd;
+	private $signs_data;
 
-	public function __construct(String $url, SpriteCountryTrailData $sctd, SpriteCountryData $scd) {
+	public function __construct(String $url, 
+	                            SpriteCountryTrailData $sctd, 
+	                            SpriteCountryData $scd, 
+	                            SignsData $signs_data) {
 	    
 		$this->trail = null;
 		$this->sctd = $sctd;
 		$this->scd = $scd;
+		$this->signs_data = $signs_data;
 		
 		$parts = $this->convertUrlToParts($url); // may throw exception
 		$this->trail_code = $parts[TrailEntry::KEY__TRAIL_CODE];
@@ -76,6 +83,8 @@ class TrailRequest {
 	public function getHtml() {
 
 		$trail = $this->getTrail();
+
+		// Handle trail end requests...
 		
 		if ($this->trail_n == 'end') {
 		    // special case :-/
@@ -84,11 +93,22 @@ class TrailRequest {
 		}
 		
 		$trail_entry = $trail->getTrailEntry($this->trail_n);
-				
+		
+		// ... or render a specific entry ...
+		
 		if (! is_null($trail_entry)) {
 		    
 		    if ($trail_entry instanceof TrailEntryImage) {
-                $renderer = new TrailEntryImageRenderer($trail_entry); 
+		        
+		        // Currently we only use signs on image pages, so load them here and pass them in
+		        $signs = array();
+		        // TODO: Move this into a separate object
+		        // function loadSignsFromData():
+		        foreach ($this->signs_data->getData() as $sd) {
+                    array_push($signs, new Sign($sd[SignsData::FIELD__SIGN], $sd[SignsData::FIELD__DISPLAY_TEXT]));
+                }
+		        
+                $renderer = new TrailEntryImageRenderer($trail_entry, $signs); 
                 $html = $renderer->getHtml();	
                 return $html;
 		    } else {
