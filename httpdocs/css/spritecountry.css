@@ -109,6 +109,13 @@ body#homepage div.section_wrap {
 	width: 100%;
 	justify-content: center;
 	padding: 2em;
+	
+}
+
+body#homepage div.section_wrap p {
+	display: flex;
+	width: 50%;
+	justify-content: center;
 }
 
 /* Header */
@@ -133,6 +140,9 @@ div#index_head {
 	font-size: 2.5em;
 }
 
+#intro {
+	padding-top: 0 !important;
+}
 
 /* Info box */
 div.trail_entry_box {

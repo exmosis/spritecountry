@@ -42,6 +42,13 @@ $scd->load();
 			<div id="intro" class="section_wrap">
 				<p>A labyrinth gallery of videogame photography</p>
 			</div>
+			<div id="intro" class="section_wrap">
+				<p>
+					All images have been post-processed, and are a combination of the 
+					original game environment, my own hardware (and its limits), and 
+					applied styling and after-effects.
+				</p>
+			</div>
 			
 			<?php
 
@@ -53,6 +60,7 @@ $scd->load();
 			    if (count($trails) == 1) {
 			        // got data back so use it
 			        $trail_code = $trails[0][SpriteCountryTrailData::FIELD__TRAIL];
+					$trail = new Trail($trail_code, $sctd, $scd);
 			    }
 			}
 			
@@ -60,10 +68,13 @@ $scd->load();
 			if (is_null($trail_code)) {
 				$trails = $sctd->getShuffledTrails();
 				$trail_code = $trails[0][SpriteCountryTrailData::FIELD__TRAIL];
+				$trail = new Trail($trail_code, $sctd, $scd);
 			}
-            ?>
-            
+         ?>
+
+			<div class="trail_intro wrap">Entry <?php echo $trail->getId(); ?> of ?</div> 
 			<div id="trail_menu" class="section_wrap">
+
 			<?php
 			    $trail = new Trail($trail_code, $sctd, $scd);
 				$entry = null;
@@ -71,30 +82,37 @@ $scd->load();
 				    $entry = $trail->getRandomTrailEntry();
 				}
 				$box = new TrailInfoBox($entry);
-				echo $box->getHtml(true, true);
+				echo $box->getHtml(true, false);
 			?>
 			</div>	
+			
 
-			<div id="newsletter_form" class="section_wrap">
-            <form
-              action="https://buttondown.email/api/emails/embed-subscribe/sprite_country"
-              method="post"
-              target="popupwindow"
-              onsubmit="window.open('https://buttondown.email/sprite_country', 'popupwindow')"
-              class="embeddable-buttondown-form"
-            >
-              <p>
-              <label for="bd-email">Subscribe to get updates, including new trails and new features being added:</label>
-              </p>
-              <div>
-              <input type="email" name="email" id="bd-email" />
-              <input type="hidden" value="1" name="embed" />
-              <input type="submit" value="Subscribe" />
-              </div>
-              <p>
-                <a href="https://buttondown.email" target="_blank">Powered by Buttondown</a>
-              </p>
-            </form>
+			<div id="newsletter_form">
+				<form
+				action="https://buttondown.email/api/emails/embed-subscribe/sprite_country"
+				method="post"
+				target="popupwindow"
+				onsubmit="window.open('https://buttondown.email/sprite_country', 'popupwindow')"
+				class="embeddable-buttondown-form"
+				>
+					<div class="section_wrap">
+						<p>
+							Subscribe to get updates, including new trails and new features being added:
+						</p>
+					</div>
+					<div class="section_wrap">
+						<div>
+							<input type="email" name="email" id="bd-email" />
+							<input type="hidden" value="1" name="embed" />
+							<input type="submit" value="Subscribe" />
+						</div>
+					</div>
+					<div class="section_wrap">
+						<p>
+							<a href="https://buttondown.email" target="_blank">Powered by Buttondown</a>
+						</p>
+					</div>
+				</form>
 			</div>
 			
 			<!-- div id="instructions" class="section_wrap">
