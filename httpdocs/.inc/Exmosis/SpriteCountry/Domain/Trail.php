@@ -12,6 +12,7 @@ use Exception;
  */
 class Trail {
 
+	private $id;
 	private $trail_code;
 	private $name;
 	private $game;
@@ -46,6 +47,10 @@ class Trail {
 	    $this->utef = $utef;
 	}
 	
+	public function getId() {
+		return $this->id;
+	}	
+	
 	public function getCode() {
 		return $this->trail_code;
 	}
@@ -75,6 +80,7 @@ class Trail {
 	 */
 	protected function loadFromTrailData(SpriteCountryTrailData $sctd) {
 		$data = $sctd->getData($this->trail_code);
+		$this->id = $data[0][SpriteCountryTrailData::FIELD__ID];
 		$this->name = $data[0][SpriteCountryTrailData::FIELD__NAME];
 		$this->game = $data[0][SpriteCountryTrailData::FIELD__GAME];
 		$this->developer = $data[0][SpriteCountryTrailData::FIELD__DEVELOPER];

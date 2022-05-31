@@ -7,6 +7,7 @@ use \League\Csv\Reader;
 class SpriteCountryTrailData {
 
 	// This class defines the headers to be used in the CSV, as single source of truth.
+	const FIELD__ID = 'id';
 	const FIELD__TRAIL = 'trail_code';
 	const FIELD__NAME = 'name';
 	const FIELD__GAME = 'game';
